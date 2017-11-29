@@ -2,15 +2,16 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.webmagic.dao.ISearchDao">
 
-
-	<insert id="insertSearch" parameterType="com.webmagic.entity.Search">
+	<insert id="insertSearch" useGeneratedKeys="true" keyProperty="searchid"
+		parameterType="com.webmagic.entity.Search">
 		insert into search
-		( searchName, searchCount,
+		( searchId, searchName, searchCount,
 		searchUrl,
 		startDate,
 		endDate
 		)
 		values (
+		#{searchid,jdbcType=INTEGER}
 		#{searchname,jdbcType=VARCHAR},
 		#{searchcount,jdbcType=INTEGER},
 		#{searchurl,jdbcType=VARCHAR},
@@ -28,15 +29,15 @@
 			companySynopsis)
 			values
 			<foreach separator="," collection="listCompany" item="temp">
-				(#{companyid,jdbcType=INTEGER},
-				#{companyname,jdbcType=VARCHAR},
-				#{companytel,jdbcType=VARCHAR},
-				#{companyemail,jdbcType=VARCHAR},
-				#{companywebsite,jdbcType=VARCHAR},
-				#{companyaddress,jdbcType=VARCHAR},
-				#{companysort,jdbcType=INTEGER},
-				#{createdate,jdbcType=TIMESTAMP}, #{searchid,jdbcType=INTEGER},
-				#{companysynopsis,jdbcType=LONGVARCHAR})
+				(#{temp.companyid,jdbcType=VARCHAR},
+				#{temp.companyname,jdbcType=VARCHAR},
+				#{temp.companytel,jdbcType=VARCHAR},
+				#{temp.companyemail,jdbcType=VARCHAR},
+				#{temp.companywebsite,jdbcType=VARCHAR},
+				#{temp.companyaddress,jdbcType=VARCHAR},
+				#{temp.companysort,jdbcType=INTEGER},
+				#{temp.createdate,jdbcType=TIMESTAMP}, #{searchid,jdbcType=INTEGER},
+				#{temp.companysynopsis,jdbcType=LONGVARCHAR})
 			</foreach>
 			;
 
@@ -57,24 +58,25 @@
 			)
 			values
 			<foreach separator="," collection="listCompany" item="temp">
-				(#{id,jdbcType=INTEGER},
-				#{legalperson,jdbcType=VARCHAR},
-				#{legalpersoninformation,jdbcType=VARCHAR},
-				#{registeredcapital,jdbcType=DECIMAL},
-				#{registrationtime,jdbcType=TIMESTAMP},
-				#{enterprisestate,jdbcType=VARCHAR},
-				#{businessregistrationnumber,jdbcType=VARCHAR},
-				#{organizationcode,jdbcType=VARCHAR},
-				#{uniformcreditcode,jdbcType=VARCHAR},
-				#{enterprisetype,jdbcType=VARCHAR},
-				#{taxpayeridentification,jdbcType=VARCHAR},
-				#{industry,jdbcType=VARCHAR}, #{businessterm,jdbcType=VARCHAR},
-				#{approvaldate,jdbcType=VARCHAR},
-				#{registrationauthority,jdbcType=VARCHAR},
-				#{englishname,jdbcType=VARCHAR},
-				#{registeredaddress,jdbcType=VARCHAR},
-				#{businessscope,jdbcType=VARCHAR},
-				#{ownershipstructure,jdbcType=LONGVARCHAR}
+				(#{temp.companyid,jdbcType=INTEGER},
+				#{temp.companyInformation.legalperson,jdbcType=VARCHAR},
+				#{temp.companyInformation.legalpersoninformation,jdbcType=VARCHAR},
+				#{temp.companyInformation.registeredcapital,jdbcType=VARCHAR},
+				#{temp.companyInformation.registrationtime,jdbcType=VARCHAR},
+				#{temp.companyInformation.enterprisestate,jdbcType=VARCHAR},
+				#{temp.companyInformation.businessregistrationnumber,jdbcType=VARCHAR},
+				#{temp.companyInformation.organizationcode,jdbcType=VARCHAR},
+				#{temp.companyInformation.uniformcreditcode,jdbcType=VARCHAR},
+				#{temp.companyInformation.enterprisetype,jdbcType=VARCHAR},
+				#{temp.companyInformation.taxpayeridentification,jdbcType=VARCHAR},
+				#{temp.companyInformation.industry,jdbcType=VARCHAR},
+				#{temp.companyInformation.businessterm,jdbcType=VARCHAR},
+				#{temp.companyInformation.approvaldate,jdbcType=VARCHAR},
+				#{temp.companyInformation.registrationauthority,jdbcType=VARCHAR},
+				#{temp.companyInformation.englishname,jdbcType=VARCHAR},
+				#{temp.companyInformation.registeredaddress,jdbcType=VARCHAR},
+				#{temp.companyInformation.businessscope,jdbcType=VARCHAR},
+				#{temp.companyInformation.ownershipstructure,jdbcType=LONGVARCHAR}
 				)
 			</foreach>
 			;

@@ -3,7 +3,7 @@ package com.webmagic.entity;
 import java.util.Date;
 
 public class Company {
-	private Integer companyid;
+	private String companyid;
 
 	private String companyname;
 
@@ -19,19 +19,17 @@ public class Company {
 
 	private Date createdate;
 
-	private Integer searchid;
-
 	private String companysynopsis;
 
 	private Search search;
 
 	private CompanyInformation companyInformation;
 
-	public Integer getCompanyid() {
+	public String getCompanyid() {
 		return companyid;
 	}
 
-	public void setCompanyid(Integer companyid) {
+	public void setCompanyid(String companyid) {
 		this.companyid = companyid;
 	}
 
@@ -40,7 +38,7 @@ public class Company {
 	}
 
 	public void setCompanyname(String companyname) {
-		this.companyname = companyname == null ? null : companyname.trim();
+		this.companyname = companyname;
 	}
 
 	public String getCompanytel() {
@@ -48,7 +46,7 @@ public class Company {
 	}
 
 	public void setCompanytel(String companytel) {
-		this.companytel = companytel == null ? null : companytel.trim();
+		this.companytel = companytel;
 	}
 
 	public String getCompanyemail() {
@@ -56,7 +54,7 @@ public class Company {
 	}
 
 	public void setCompanyemail(String companyemail) {
-		this.companyemail = companyemail == null ? null : companyemail.trim();
+		this.companyemail = companyemail;
 	}
 
 	public String getCompanywebsite() {
@@ -64,8 +62,7 @@ public class Company {
 	}
 
 	public void setCompanywebsite(String companywebsite) {
-		this.companywebsite = companywebsite == null ? null : companywebsite
-				.trim();
+		this.companywebsite = companywebsite;
 	}
 
 	public String getCompanyaddress() {
@@ -73,8 +70,7 @@ public class Company {
 	}
 
 	public void setCompanyaddress(String companyaddress) {
-		this.companyaddress = companyaddress == null ? null : companyaddress
-				.trim();
+		this.companyaddress = companyaddress;
 	}
 
 	public Integer getCompanysort() {
@@ -93,21 +89,12 @@ public class Company {
 		this.createdate = createdate;
 	}
 
-	public Integer getSearchid() {
-		return searchid;
-	}
-
-	public void setSearchid(Integer searchid) {
-		this.searchid = searchid;
-	}
-
 	public String getCompanysynopsis() {
 		return companysynopsis;
 	}
 
 	public void setCompanysynopsis(String companysynopsis) {
-		this.companysynopsis = companysynopsis == null ? null : companysynopsis
-				.trim();
+		this.companysynopsis = companysynopsis;
 	}
 
 	public Search getSearch() {

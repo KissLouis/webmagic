@@ -1,8 +1,14 @@
 package com.webmagic.processor;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
+import org.apache.ibatis.io.Resources;
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Cookie;
 import org.openqa.selenium.WebDriver;
@@ -13,7 +19,9 @@ import us.codecraft.webmagic.Site;
 import us.codecraft.webmagic.Spider;
 import us.codecraft.webmagic.processor.PageProcessor;
 
+import com.webmagic.dao.ISearchDao;
 import com.webmagic.entity.Company;
+import com.webmagic.entity.CompanyInformation;
 import com.webmagic.entity.Search;
 
 public class TianyanProcessor implements PageProcessor {
@@ -42,6 +50,8 @@ public class TianyanProcessor implements PageProcessor {
 	private Set<Cookie> cookies;
 	// 部分六：搜索条件封装
 	private static Search search = new Search();
+	// 部分七：搜索结果
+	private static List<Company> listCompany = new ArrayList<Company>();
 
 	@Override
 	public Site getSite() {
@@ -55,13 +65,19 @@ public class TianyanProcessor implements PageProcessor {
 		return site;
 	}
 
-	// 使用 selenium 来模拟用户的登录获取cookie信息
+	/**
+	 * 
+	 * Description:使用 selenium 来模拟用户的登录获取cookie信息
+	 * 
+	 * @Note Author:Louis Date: 2017年11月29日 下午2:37:35
+	 */
 	public void login() {
 		WebDriver driver = new ChromeDriver();
 		System.out.println(driver.getCurrentUrl());
 		driver.get("https://www.tianyancha.com/login");
 		System.out.println(driver.getCurrentUrl());
 		try {
+			// 3秒时间等待页面全部渲染完成
 			Thread.sleep(3000);
 		} catch (Exception e) {
 			// TODO
@@ -83,6 +99,23 @@ public class TianyanProcessor implements PageProcessor {
 		driver.close();
 	}
 
+	/**
+	 * 
+	 * Description: 数据新增
+	 * 
+	 * @param search
+	 * @Note Author:Louis Date: 2017年11月29日 下午2:37:22
+	 */
+	public void add(Search search) throws Exception {
+		SqlSessionFactory ssf = new SqlSessionFactoryBuilder().build(Resources
+				.getResourceAsStream("MyBatisConfig.xml"));
+		SqlSession session = ssf.openSession();
+		ISearchDao seachDao = session.getMapper(ISearchDao.class);
+		seachDao.insertSearch(search);
+		session.commit();
+		session.close();
+	}
+
 	@Override
 	public void process(Page page) {
 		// TODO Auto-generated method stub
@@ -97,6 +130,11 @@ public class TianyanProcessor implements PageProcessor {
 			// 获取页面需要的内容
 			count++;
 			Company company = new Company();
+			// 企业基本信息
+			company.setCompanyid(page
+					.getHtml()
+					.xpath("//*[@id='_container_baseInfo']/div/div[3]/table/tbody/tr[1]/td[2]/text()")
+					.get());
 			company.setCompanyname(page
 					.getHtml()
 					.xpath("//span[@class='f18 in-block vertival-middle sec-c2']/text()")
@@ -122,27 +160,125 @@ public class TianyanProcessor implements PageProcessor {
 					.xpath("//*[@id='_modal_container']/div/div/div[2]/p/text()")
 					.get());
 			company.setCompanysort(count);
+			company.setCreatedate(new Date());
+			System.out.println(company.getCompanyid());
+			// 企业工商信息
+			CompanyInformation companyInformation = new CompanyInformation();
+			companyInformation.setId(company.getCompanyid());
+			companyInformation
+					.setLegalperson(page
+							.getHtml()
+							.xpath("//*[@id='_container_baseInfo']/div/div[2]/table/tbody/tr/td[1]/div/div[1]/div[2]/div/a/text()")
+							.get());
+			companyInformation
+					.setLegalpersoninformation(page
+							.getHtml()
+							.xpath("//*[@id='_container_baseInfo']/div/div[2]/table/tbody/tr/td[1]/div/div[1]/div[2]/div/a/@href")
+							.get());
+			companyInformation
+					.setRegisteredcapital(page
+							.getHtml()
+							.xpath("//*[@id='_container_holder']/div/table/tbody/tr/td[3]/div/span/text()")
+							.get());
+			companyInformation
+					.setRegistrationtime(page
+							.getHtml()
+							.xpath("//*[@id='_container_baseInfo']/div/div[2]/table/tbody/tr/td[2]/div[2]/div[2]/div/text/text()")
+							.get());
+			companyInformation
+					.setEnterprisestate(page
+							.getHtml()
+							.xpath("//*[@id='_container_baseInfo']/div/div[2]/table/tbody/tr/td[2]/div[3]/div[2]/div/text()")
+							.get());
+			companyInformation
+					.setOwnershipstructure(page
+							.getHtml()
+							.xpath("//*[@id='_container_baseInfo']/div/div[2]/table/tbody/tr/td[3]/div[1]/img/@src")
+							.get());
+			companyInformation
+					.setBusinessregistrationnumber(page
+							.getHtml()
+							.xpath("//*[@id='_container_baseInfo']/div/div[3]/table/tbody/tr[1]/td[2]/text()")
+							.get());
+			companyInformation
+					.setOrganizationcode(page
+							.getHtml()
+							.xpath("//*[@id='_container_baseInfo']/div/div[3]/table/tbody/tr[1]/td[4]/text()")
+							.get());
+			companyInformation
+					.setUniformcreditcode(page
+							.getHtml()
+							.xpath("//*[@id='_container_baseInfo']/div/div[3]/table/tbody/tr[2]/td[2]/text()")
+							.get());
+			companyInformation
+					.setEnterprisetype(page
+							.getHtml()
+							.xpath("//*[@id='_container_baseInfo']/div/div[3]/table/tbody/tr[2]/td[4]/text()")
+							.get());
+			companyInformation
+					.setTaxpayeridentification(page
+							.getHtml()
+							.xpath("//*[@id='_container_baseInfo']/div/div[3]/table/tbody/tr[3]/td[2]/text()")
+							.get());
+			companyInformation
+					.setIndustry(page
+							.getHtml()
+							.xpath("//*[@id='_container_baseInfo']/div/div[3]/table/tbody/tr[3]/td[4]/text()")
+							.get());
+			companyInformation
+					.setBusinessterm(page
+							.getHtml()
+							.xpath("//*[@id='_container_baseInfo']/div/div[3]/table/tbody/tr[4]/td[2]/span/text()")
+							.get());
+			companyInformation
+					.setApprovaldate(page
+							.getHtml()
+							.xpath("//*[@id='_container_baseInfo']/div/div[3]/table/tbody/tr[4]/td[4]/text/text()")
+							.get());
+			companyInformation
+					.setRegistrationauthority(page
+							.getHtml()
+							.xpath("//*[@id='_container_baseInfo']/div/div[3]/table/tbody/tr[5]/td[2]/text()")
+							.get());
+			companyInformation
+					.setEnglishname(page
+							.getHtml()
+							.xpath("//*[@id='_container_baseInfo']/div/div[3]/table/tbody/tr[5]/td[4]/text()")
+							.get());
+			companyInformation
+					.setRegisteredaddress(page
+							.getHtml()
+							.xpath("//*[@id='_container_baseInfo']/div/div[3]/table/tbody/tr[6]/td[2]/text()")
+							.get());
+			companyInformation
+					.setBusinessscope(page
+							.getHtml()
+							.xpath("//*[@id='_container_baseInfo']/div/div[3]/table/tbody/tr[7]/td[2]/span/span/span[1]/text()")
+							.get());
+			company.setCompanyInformation(companyInformation);
+			listCompany.add(company);
 		}
 	}
 
 	public static void main(String[] args) throws Exception {
-
-		long startTime, endTime;
 		System.out.println("开始爬取...");
 		TianyanProcessor processor = new TianyanProcessor();
-		processor.login();
-		startTime = System.currentTimeMillis();
+		processor.login(); // 模拟登录
+		// 开始时间
+		search.setStartdate(new Date(System.currentTimeMillis()));
 		Spider.create(processor).addUrl(url).run();
-		endTime = System.currentTimeMillis();
-		System.out.println("爬取结束，耗时约" + ((endTime - startTime) / 1000)
-				+ "秒，抓取了" + count + "条记录");
-
+		// 结束时间
+		search.setEnddate(new Date(System.currentTimeMillis()));
+		System.out.println("爬取结束，耗时约"
+				+ ((search.getEnddate().getTime() - search.getStartdate()
+						.getTime()) / 1000) + "秒，抓取了" + count + "条记录");
+		search.setSearchid((int) System.currentTimeMillis());
 		search.setSearchname(name);
 		search.setSearchcount(count);
 		search.setSearchurl(url);
-		search.setStartdate(new Date(startTime));
-		search.setEnddate(new Date(endTime));
+		search.setListCompany(listCompany);
 
+		processor.add(search);
 		System.exit(0);
 	}
 

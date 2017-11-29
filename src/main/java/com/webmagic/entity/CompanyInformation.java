@@ -1,18 +1,15 @@
 package com.webmagic.entity;
 
-import java.math.BigDecimal;
-import java.util.Date;
-
 public class CompanyInformation {
-	private Integer id;
+	private String id;
 
 	private String legalperson;
 
 	private String legalpersoninformation;
 
-	private BigDecimal registeredcapital;
+	private String registeredcapital;
 
-	private Date registrationtime;
+	private String registrationtime;
 
 	private String enterprisestate;
 
@@ -44,11 +41,11 @@ public class CompanyInformation {
 
 	private Company company;
 
-	public Integer getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
@@ -57,7 +54,7 @@ public class CompanyInformation {
 	}
 
 	public void setLegalperson(String legalperson) {
-		this.legalperson = legalperson == null ? null : legalperson.trim();
+		this.legalperson = legalperson;
 	}
 
 	public String getLegalpersoninformation() {
@@ -65,23 +62,22 @@ public class CompanyInformation {
 	}
 
 	public void setLegalpersoninformation(String legalpersoninformation) {
-		this.legalpersoninformation = legalpersoninformation == null ? null
-				: legalpersoninformation.trim();
+		this.legalpersoninformation = legalpersoninformation;
 	}
 
-	public BigDecimal getRegisteredcapital() {
+	public String getRegisteredcapital() {
 		return registeredcapital;
 	}
 
-	public void setRegisteredcapital(BigDecimal registeredcapital) {
+	public void setRegisteredcapital(String registeredcapital) {
 		this.registeredcapital = registeredcapital;
 	}
 
-	public Date getRegistrationtime() {
+	public String getRegistrationtime() {
 		return registrationtime;
 	}
 
-	public void setRegistrationtime(Date registrationtime) {
+	public void setRegistrationtime(String registrationtime) {
 		this.registrationtime = registrationtime;
 	}
 
@@ -90,8 +86,7 @@ public class CompanyInformation {
 	}
 
 	public void setEnterprisestate(String enterprisestate) {
-		this.enterprisestate = enterprisestate == null ? null : enterprisestate
-				.trim();
+		this.enterprisestate = enterprisestate;
 	}
 
 	public String getBusinessregistrationnumber() {
@@ -99,8 +94,7 @@ public class CompanyInformation {
 	}
 
 	public void setBusinessregistrationnumber(String businessregistrationnumber) {
-		this.businessregistrationnumber = businessregistrationnumber == null ? null
-				: businessregistrationnumber.trim();
+		this.businessregistrationnumber = businessregistrationnumber;
 	}
 
 	public String getOrganizationcode() {
@@ -108,8 +102,7 @@ public class CompanyInformation {
 	}
 
 	public void setOrganizationcode(String organizationcode) {
-		this.organizationcode = organizationcode == null ? null
-				: organizationcode.trim();
+		this.organizationcode = organizationcode;
 	}
 
 	public String getUniformcreditcode() {
@@ -117,8 +110,7 @@ public class CompanyInformation {
 	}
 
 	public void setUniformcreditcode(String uniformcreditcode) {
-		this.uniformcreditcode = uniformcreditcode == null ? null
-				: uniformcreditcode.trim();
+		this.uniformcreditcode = uniformcreditcode;
 	}
 
 	public String getEnterprisetype() {
@@ -126,8 +118,7 @@ public class CompanyInformation {
 	}
 
 	public void setEnterprisetype(String enterprisetype) {
-		this.enterprisetype = enterprisetype == null ? null : enterprisetype
-				.trim();
+		this.enterprisetype = enterprisetype;
 	}
 
 	public String getTaxpayeridentification() {
@@ -135,8 +126,7 @@ public class CompanyInformation {
 	}
 
 	public void setTaxpayeridentification(String taxpayeridentification) {
-		this.taxpayeridentification = taxpayeridentification == null ? null
-				: taxpayeridentification.trim();
+		this.taxpayeridentification = taxpayeridentification;
 	}
 
 	public String getIndustry() {
@@ -144,7 +134,7 @@ public class CompanyInformation {
 	}
 
 	public void setIndustry(String industry) {
-		this.industry = industry == null ? null : industry.trim();
+		this.industry = industry;
 	}
 
 	public String getBusinessterm() {
@@ -152,7 +142,7 @@ public class CompanyInformation {
 	}
 
 	public void setBusinessterm(String businessterm) {
-		this.businessterm = businessterm == null ? null : businessterm.trim();
+		this.businessterm = businessterm;
 	}
 
 	public String getApprovaldate() {
@@ -160,7 +150,7 @@ public class CompanyInformation {
 	}
 
 	public void setApprovaldate(String approvaldate) {
-		this.approvaldate = approvaldate == null ? null : approvaldate.trim();
+		this.approvaldate = approvaldate;
 	}
 
 	public String getRegistrationauthority() {
@@ -168,8 +158,7 @@ public class CompanyInformation {
 	}
 
 	public void setRegistrationauthority(String registrationauthority) {
-		this.registrationauthority = registrationauthority == null ? null
-				: registrationauthority.trim();
+		this.registrationauthority = registrationauthority;
 	}
 
 	public String getEnglishname() {
@@ -177,7 +166,7 @@ public class CompanyInformation {
 	}
 
 	public void setEnglishname(String englishname) {
-		this.englishname = englishname == null ? null : englishname.trim();
+		this.englishname = englishname;
 	}
 
 	public String getRegisteredaddress() {
@@ -185,8 +174,7 @@ public class CompanyInformation {
 	}
 
 	public void setRegisteredaddress(String registeredaddress) {
-		this.registeredaddress = registeredaddress == null ? null
-				: registeredaddress.trim();
+		this.registeredaddress = registeredaddress;
 	}
 
 	public String getBusinessscope() {
@@ -194,8 +182,7 @@ public class CompanyInformation {
 	}
 
 	public void setBusinessscope(String businessscope) {
-		this.businessscope = businessscope == null ? null : businessscope
-				.trim();
+		this.businessscope = businessscope;
 	}
 
 	public String getOwnershipstructure() {
@@ -203,8 +190,7 @@ public class CompanyInformation {
 	}
 
 	public void setOwnershipstructure(String ownershipstructure) {
-		this.ownershipstructure = ownershipstructure == null ? null
-				: ownershipstructure.trim();
+		this.ownershipstructure = ownershipstructure;
 	}
 
 	public Company getCompany() {

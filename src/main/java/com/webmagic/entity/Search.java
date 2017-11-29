@@ -32,7 +32,7 @@ public class Search {
 	}
 
 	public void setSearchname(String searchname) {
-		this.searchname = searchname == null ? null : searchname.trim();
+		this.searchname = searchname;
 	}
 
 	public Integer getSearchcount() {
