@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.webmagic.dao.ICompanyDao">
+
+	<insert id="insertCompany" parameterType="com.webmagic.entity.Company">
+		insert into company
+		(companyId, companyName, companyTel,
+		companyEmail, companyWebsite,
+		companyAddress,
+		companySort, createDate, searchId,
+		companySynopsis)
+		values (#{companyid,jdbcType=INTEGER},
+		#{companyname,jdbcType=VARCHAR},
+		#{companytel,jdbcType=VARCHAR},
+		#{companyemail,jdbcType=VARCHAR}, #{companywebsite,jdbcType=VARCHAR},
+		#{companyaddress,jdbcType=VARCHAR},
+		#{companysort,jdbcType=INTEGER},
+		#{createdate,jdbcType=TIMESTAMP}, #{searchid,jdbcType=INTEGER},
+		#{companysynopsis,jdbcType=LONGVARCHAR})
+	</insert>
+
+</mapper>

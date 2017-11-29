@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.webmagic.dao.ISearchDao">
+
+
+	<insert id="insertSearch" parameterType="com.webmagic.entity.Search">
+		insert into search
+		( searchName, searchCount,
+		searchUrl,
+		startDate,
+		endDate
+		)
+		values (
+		#{searchname,jdbcType=VARCHAR},
+		#{searchcount,jdbcType=INTEGER},
+		#{searchurl,jdbcType=VARCHAR},
+		#{startdate,jdbcType=TIMESTAMP},
+		#{enddate,jdbcType=TIMESTAMP}
+		);
+
+		<if test="listCompany.size()>0">
+			insert into company
+			(companyId, companyName, companyTel,
+			companyEmail,
+			companyWebsite,
+			companyAddress,
+			companySort, createDate, searchId,
+			companySynopsis)
+			values
+			<foreach separator="," collection="listCompany" item="temp">
+				(#{companyid,jdbcType=INTEGER},
+				#{companyname,jdbcType=VARCHAR},
+				#{companytel,jdbcType=VARCHAR},
+				#{companyemail,jdbcType=VARCHAR},
+				#{companywebsite,jdbcType=VARCHAR},
+				#{companyaddress,jdbcType=VARCHAR},
+				#{companysort,jdbcType=INTEGER},
+				#{createdate,jdbcType=TIMESTAMP}, #{searchid,jdbcType=INTEGER},
+				#{companysynopsis,jdbcType=LONGVARCHAR})
+			</foreach>
+			;
+
+			insert into
+			company_information (id, legalPerson,
+			legalPersonInformation,
+			registeredCapital, registrationTime,
+			enterpriseState,
+			businessRegistrationNumber,
+			organizationCode,
+			uniformCreditCode,
+			enterpriseType,
+			taxpayerIdentification, industry,
+			businessTerm,
+			approvalDate, registrationAuthority, englishName,
+			registeredAddress,
+			businessScope, ownershipStructure
+			)
+			values
+			<foreach separator="," collection="listCompany" item="temp">
+				(#{id,jdbcType=INTEGER},
+				#{legalperson,jdbcType=VARCHAR},
+				#{legalpersoninformation,jdbcType=VARCHAR},
+				#{registeredcapital,jdbcType=DECIMAL},
+				#{registrationtime,jdbcType=TIMESTAMP},
+				#{enterprisestate,jdbcType=VARCHAR},
+				#{businessregistrationnumber,jdbcType=VARCHAR},
+				#{organizationcode,jdbcType=VARCHAR},
+				#{uniformcreditcode,jdbcType=VARCHAR},
+				#{enterprisetype,jdbcType=VARCHAR},
+				#{taxpayeridentification,jdbcType=VARCHAR},
+				#{industry,jdbcType=VARCHAR}, #{businessterm,jdbcType=VARCHAR},
+				#{approvaldate,jdbcType=VARCHAR},
+				#{registrationauthority,jdbcType=VARCHAR},
+				#{englishname,jdbcType=VARCHAR},
+				#{registeredaddress,jdbcType=VARCHAR},
+				#{businessscope,jdbcType=VARCHAR},
+				#{ownershipstructure,jdbcType=LONGVARCHAR}
+				)
+			</foreach>
+			;
+
+		</if>
+
+	</insert>
+
+
+
+</mapper>
