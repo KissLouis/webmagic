@@ -11,7 +11,7 @@
 		endDate
 		)
 		values (
-		#{searchid,jdbcType=INTEGER}
+		#{searchid,jdbcType=INTEGER},
 		#{searchname,jdbcType=VARCHAR},
 		#{searchcount,jdbcType=INTEGER},
 		#{searchurl,jdbcType=VARCHAR},

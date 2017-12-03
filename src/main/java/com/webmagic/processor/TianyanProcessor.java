@@ -42,7 +42,7 @@ public class TianyanProcessor implements PageProcessor {
 	// 部分二：总共爬取的数量
 	private static int count = 0;
 	// 部分三：需要搜索的公司关键字
-	private static String name = "上海高颖信息技术有限公司";
+	private static String name = "宁波市民营企业贷款担保有限公司";
 	// 部分四：爬取的url
 	private static String url = "https://www.tianyancha.com/search?key=" + name
 			+ "&checkFrom=searchBox";

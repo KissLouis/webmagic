@@ -29,8 +29,6 @@
 	</environments>
 
 	<mappers>
-		<mapper class="com.webmagic.dao.ICompanyDao" />
-		<mapper class="com.webmagic.dao.ICompanyInformationDao" />
 		<mapper class="com.webmagic.dao.ISearchDao" />
 	</mappers>
 
