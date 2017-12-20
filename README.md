@@ -1,2 +1,0 @@
-# webmagic_company
-基于Java爬虫框架WebMagic爬取企业基本信息
