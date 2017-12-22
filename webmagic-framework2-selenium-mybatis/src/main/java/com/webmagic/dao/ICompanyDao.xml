@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.webmagic.dao.ICompanyDao">
+
+	<insert id="addCompany" parameterType="com.webmagic.entity.Company">
+
+		insert into company
+		(unifiedSocialCreditCode, companyName,
+		companyTel, companyWebsite,
+		companyAddress,
+		companySort, createDate, searchName,
+		companyProfile)
+		values (#{company.unifiedsocialcreditcode,jdbcType=VARCHAR},
+		#{company.companyname,jdbcType=VARCHAR},
+		#{company.companytel,jdbcType=VARCHAR},
+		#{company.companywebsite,jdbcType=VARCHAR},
+		#{company.companyaddress,jdbcType=VARCHAR},
+		#{company.companysort,jdbcType=INTEGER},
+		NOW(),
+		#{company.searchname,jdbcType=VARCHAR},
+		#{company.companyprofile,jdbcType=LONGVARCHAR});
+
+	</insert>
+
+
+
+</mapper>

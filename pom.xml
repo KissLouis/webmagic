@@ -63,5 +63,6 @@
 
 	<modules>
 		<module>webmagic-framework1-example</module>
+		<module>webmagic-framework2-selenium-mybatis</module>
 	</modules>
 </project>
