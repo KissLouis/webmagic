@@ -38,7 +38,11 @@ public class QixinPageProcessor implements PageProcessor {
 			.addHeader(
 					"Accept",
 					"text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8")
-			.setRetryTimes(3).setTimeOut(3000).setSleepTime(1000);
+			.addHeader("Accept-Encoding", "gzip, deflate")
+			.addHeader("Accept-Language", "zh-CN,zh;q=0.9")
+			.addHeader("Connection", "keep-alive")
+			.addHeader("Host", "www.qixin.com").setRetryTimes(3)
+			.setTimeOut(3000).setSleepTime(1000);
 
 	// 部分二：总共爬取的数量
 	private static int count = 0;
