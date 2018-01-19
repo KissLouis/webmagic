@@ -8,7 +8,7 @@ import us.codecraft.webmagic.model.annotation.HelpUrl;
 import us.codecraft.webmagic.model.annotation.TargetUrl;
 
 @TargetUrl("http://www.qixin.com/company/*")
-@HelpUrl("http://www.qixin.com/search?key=广州皓云原智信息科技有限公司&page=1")
+@HelpUrl("http://www.qixin.com/search?key=广州皓云原智信息科技有限公司")
 @ExtractBy(value = "/html/body/div[5]/div/div[1]/div[3]/div[2]/div[1]/div[2]/div[1]/div[1]/a/@href", multi = true)
 public class QixinRepo {
 
